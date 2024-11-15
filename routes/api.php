@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -22,4 +23,12 @@ Route::group(['prefix' => 'tag', 'middleware' => ['auth:sanctum']], function () 
     Route::post('/store', [TagController::class, 'store']);
     Route::put('/{id}/update', [TagController::class, 'update']);
     Route::delete('/{id}/delete', [TagController::class, 'delete']);
+});
+
+#posts
+Route::group(['prefix' => 'post', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/{id}/show', [PostController::class, 'show']);
+    Route::post('/store', [PostController::class, 'store']);
+    Route::put('/{id}/update', [PostController::class, 'update']);
+    Route::delete('/{id}/delete', [PostController::class, 'delete']);
 });
