@@ -2,10 +2,7 @@
 
 namespace App\Services\Api;
 
-use App\Models\User;
 use App\Repositories\UserRepository;
-use App\Repositories\IrmãoRepository;
-
 class UserService
 {
     private $userRepository;

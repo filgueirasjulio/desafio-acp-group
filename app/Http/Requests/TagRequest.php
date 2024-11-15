@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,8 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|required|string',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users', 'email')->ignore(auth()->user()->id),
-            ],
+            'description' => 'required|string',
+            'bg_color' => 'required|string',
         ];
     }
 }
