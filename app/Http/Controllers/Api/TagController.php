@@ -10,38 +10,32 @@ use App\Http\Resources\TagResource;
 
 class TagController extends Controller
 {
-    private $tagService;
+    private TagService $tagService;
 
     public function __construct(TagService $tagService)
     {
         $this->tagService = $tagService;
     }
 
-    public function show($id): TagResource
+    public function show(int $id): TagResource
     {
-        $tag = $this->tagService->show($id);
-       
-        return new TagResource($tag);
+        return new TagResource($this->tagService->show($id));
     }
 
     public function store(TagRequest $request): TagResource
     {
-        $tag = $this->tagService->store($request->validated());
-
-        return new TagResource($tag);
+        return new TagResource($this->tagService->store($request->validated()));
     }
 
     public function update(TagRequest $request, int $id): TagResource
     {
-        $tag = $this->tagService->update($id, $request->validated());
-
-        return new TagResource($tag);
+        return new TagResource($this->tagService->update($id, $request->validated()));
     }
 
-    public function delete($tagId): JsonResponse
+    public function delete(int $id): JsonResponse
     {
-        $this->tagService->delete($tagId);
+        $this->tagService->delete($id);
 
-        return response()->json(['message' => 'Tag deletada com sucesso!'], 200);
+        return response()->json(['message' => 'Tag deletada com sucesso!'], JsonResponse::HTTP_OK);
     }
 }

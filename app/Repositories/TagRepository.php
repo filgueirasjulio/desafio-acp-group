@@ -3,35 +3,40 @@
 namespace App\Repositories;
 
 use App\Models\Tag;
-
 class TagRepository
 {
-    private $model;
+    private Tag $model;
 
     public function __construct(Tag $model)
     {
         $this->model = $model;
     }
-    public function find($id)
+
+    public function find(int $id): ?Tag
     {
         return $this->model->find($id);
     }
 
-    public function store(array $data)
+    public function store(array $data): Tag
     {
         return $this->model->create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): Tag
     {
         $tag = $this->find($id);
+
+        if (!$tag) {
+            throw new \Exception("Tag not found.");
+        }
+
         $tag->update($data);
 
         return $tag;
     }
 
-    public function destroy($tagId)
+    public function destroy(int $id): void
     {
-        $this->model->destroy($tagId);
+        $this->model->destroy($id);
     }
 }

@@ -6,28 +6,33 @@ use App\Models\User;
 
 class UserRepository
 {
-    private $model;
+    private User $model;
 
     public function __construct(User $model)
     {
         $this->model = $model;
     }
 
-    public function find($id)
+    public function find(int $id): ?User
     {
         return $this->model->find($id);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): User
     {
         $user = $this->find($id);
+
+        if (!$user) {
+            throw new \Exception("User not found.");
+        }
+
         $user->update($data);
 
         return $user;
     }
 
-    public function destroy($userId)
+    public function destroy(int $id): void
     {
-        $this->model->destroy($userId);
+        $this->model->destroy($id);
     }
 }

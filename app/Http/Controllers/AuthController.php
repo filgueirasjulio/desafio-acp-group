@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -17,11 +16,11 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (!auth()->attempt($credentials)) {
+        if (!Auth::attempt($credentials)) {
             return response()->json(['error' => 'Credenciais inválidas'], 401);
         }
 
-        $user = auth()->user();
+        $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['token' => $token]);
@@ -45,14 +44,13 @@ class AuthController extends Controller
 
         return response()->json(['token' => $token]);
     }
-    
+
     public function logout(Request $request)
     {
-        logger('Logout iniciado');
-        logger($request->user()); // Verifique se o usuário está autenticado
-        logger($request->header('Authorization')); // Verifique se o token está sendo enviado
+        $request->user()->tokens->each(function ($token) {
+            $token->delete();
+        });
 
-        $request->user()->tokens()->delete();
         return response()->json(['message' => 'Desconectado com sucesso']);
     }
 }

@@ -2,41 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Services\Api\UserService;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    private $userService;
+    private UserService $userService;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    public function show($id): UserResource
+    public function show(int $id): UserResource
     {
-        $user = $this->userService->show($id);
-       
-        return new UserResource($user);
+        return new UserResource($this->userService->show($id));
     }
 
     public function update(UserUpdateRequest $request, int $id): UserResource
     {
-        $user = $this->userService->update($id, $request->validated());
-
-        return new UserResource($user);
+        return new UserResource($this->userService->update($id, $request->validated()));
     }
 
-    public function delete($userId): JsonResponse
+    public function delete(int $id): JsonResponse
     {
-        $this->userService->delete($userId);
+        $this->userService->delete($id);
 
-        return response()->json(['message' => 'Usuário deletado com sucesso!'], 200);
+        return response()->json(['message' => 'Usuário deletado com sucesso!'], JsonResponse::HTTP_OK);
     }
 }

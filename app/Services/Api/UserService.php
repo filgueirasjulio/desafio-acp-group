@@ -5,14 +5,14 @@ namespace App\Services\Api;
 use App\Repositories\UserRepository;
 class UserService
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         return $this->userRepository->find($id);
     }
@@ -22,8 +22,8 @@ class UserService
         return $this->userRepository->update($id, $data);
     }
 
-    public function delete($userId)
+    public function delete(int $id)
     {
-        $this->userRepository->destroy($userId);
+        $this->userRepository->destroy($id);
     }
 }

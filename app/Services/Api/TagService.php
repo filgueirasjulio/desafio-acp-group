@@ -2,19 +2,18 @@
 
 namespace App\Services\Api;
 
-use App\Models\Tag;
 use App\Repositories\TagRepository;
 
 class TagService
 {
-    private $tagRepository;
+    private TagRepository $tagRepository;
 
     public function __construct(TagRepository $tagRepository)
     {
         $this->tagRepository = $tagRepository;
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         return $this->tagRepository->find($id);
     }
@@ -29,8 +28,8 @@ class TagService
         return $this->tagRepository->update($id, $data);
     }
 
-    public function delete($tagId)
+    public function delete(int $id)
     {
-        $this->tagRepository->destroy($tagId);
+        $this->tagRepository->destroy($id);
     }
 }
