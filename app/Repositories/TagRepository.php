@@ -37,6 +37,12 @@ class TagRepository
 
     public function destroy(int $id): void
     {
+        $tag = $this->model->find($id);
+
+        if (!$tag) {
+            throw new \Exception("Tag not found.");
+        }
+
         $this->model->destroy($id);
     }
 }

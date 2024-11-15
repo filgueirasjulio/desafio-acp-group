@@ -33,6 +33,12 @@ class UserRepository
 
     public function destroy(int $id): void
     {
+        $user = $this->model->find($id);
+
+        if (!$user) {
+            throw new \Exception("User not found.");
+        }
+
         $this->model->destroy($id);
     }
 }
