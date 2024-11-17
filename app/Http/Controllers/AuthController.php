@@ -9,6 +9,11 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -24,6 +29,11 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['token' => $token]);
+    }
+
+    public function showRegisterForm()
+    {
+        return view('auth.login');
     }
 
     public function register(Request $request)
