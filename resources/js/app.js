@@ -5,6 +5,16 @@ import App from './components/App.vue';
 import LoginForm from './components/LoginForm.vue';
 import Dashboard from './components/Dashboard.vue';
 
+
+
+export function checkTokenAndRedirect() {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      router.push('/dashboard');
+    }
+}
+
 // Definindo as rotas
 const routes = [
     { path: '/login', component: LoginForm, name: 'login-form' },

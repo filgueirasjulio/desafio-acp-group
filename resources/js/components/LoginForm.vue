@@ -29,6 +29,9 @@
 </template>
 
 <script>
+    import {
+        checkTokenAndRedirect
+    } from '../app';
     export default {
         data() {
             return {
@@ -43,17 +46,27 @@
                 try {
                     const response = await axios.post('/api/login', {
                         email: this.email,
-                        password: this.password,
+                        password: this.password
                     });
 
                     const token = response.data.token;
                     localStorage.setItem('authToken', token);
 
-                    this.$router.push('/dashboard');
+                    // Verifica se o token foi armazenado corretamente
+                    const storedToken = localStorage.getItem('authToken');
+                    console.log('Token armazenado:', storedToken);
+
+                    if (storedToken) {
+                        // Redireciona para o dashboard
+                        this.$router.push('/dashboard');
+                    }
                 } catch (error) {
                     console.error('Erro no login:', error);
                 }
             }
+        },
+        mounted() {
+            checkTokenAndRedirect();
         }
     };
 </script>

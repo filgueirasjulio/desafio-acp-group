@@ -28,6 +28,8 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        session()->put('auth_token', $token);
+
         return response()->json(['token' => $token]);
     }
 
