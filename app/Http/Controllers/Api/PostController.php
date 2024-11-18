@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Services\Api\PostService;
-use App\Http\Requests\PostRequest;
 use Illuminate\Http\JsonResponse;
+use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PostController extends Controller
 {
@@ -15,6 +17,11 @@ class PostController extends Controller
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
+    }
+
+    public function index(Request $request): ResourceCollection
+    {
+        return PostResource::collection($this->postService->index($request->all()));
     }
 
     public function show(int $id): PostResource

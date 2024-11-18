@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 class PostRepository
 {
@@ -11,6 +12,17 @@ class PostRepository
     public function __construct(Post $model)
     {
         $this->model = $model;
+    }
+
+    public function all(array $filters = null): Collection
+    {
+        $result = $this->model->with('user', 'tags');
+
+        if(isset($fiters['user_id'])) {
+            $result = $result->where('user_id', $filters['user_id']);
+        }
+
+        return $result->orderBy('created_at', 'desc')->get();
     }
 
     public function find(int $id): ?Post

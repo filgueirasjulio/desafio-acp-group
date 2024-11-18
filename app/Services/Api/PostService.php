@@ -13,6 +13,11 @@ class PostService
         $this->postRepository = $postRepository;
     }
 
+    public function index(array $filters)
+    {
+        return $this->postRepository->all($filters);
+    }
+
     public function show(int $id)
     {
         return $this->postRepository->find($id);

@@ -771,6 +771,9 @@ select {
 .top-12 {
   top: 3rem;
 }
+.left-0 {
+  left: 0px;
+}
 .z-0 {
   z-index: 0;
 }
@@ -975,6 +978,9 @@ select {
 .max-w-xl {
   max-width: 36rem;
 }
+.max-w-4xl {
+  max-width: 56rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1007,6 +1013,10 @@ select {
 }
 .translate-y-\[10px\] {
   --tw-translate-y: 10px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-\[5px\] {
+  --tw-translate-y: 5px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-100 {
@@ -1086,6 +1096,16 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .overflow-hidden {
   overflow: hidden;
@@ -1174,12 +1194,12 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(129 140 248 / var(--tw-border-opacity, 1));
 }
-.border-transparent {
-  border-color: transparent;
-}
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
+}
+.border-transparent {
+  border-color: transparent;
 }
 .border-l-red-500 {
   --tw-border-opacity: 1;
@@ -1208,6 +1228,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));
 }
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
+}
 .bg-red-500\/20 {
   background-color: rgb(239 68 68 / 0.2);
 }
@@ -1218,10 +1242,6 @@ select {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-.bg-red-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
 }
 .fill-current {
   fill: currentColor;
@@ -1243,6 +1263,9 @@ select {
 }
 .p-8 {
   padding: 2rem;
+}
+.p-1\.5 {
+  padding: 0.375rem;
 }
 .px-1 {
   padding-left: 0.25rem;
@@ -1321,6 +1344,9 @@ select {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pt-12 {
+  padding-top: 3rem;
 }
 .text-left {
   text-align: left;

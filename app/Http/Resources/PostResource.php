@@ -21,6 +21,7 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'author' => new UserResource($this->user),
             'tags' => TagResource::collection($this->tags),
+            'created_at' => $this->created_at->format('d/m/Y')
         ];
     }
 }

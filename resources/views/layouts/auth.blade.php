@@ -28,5 +28,7 @@
         <footer class="w-full text-center py-4 bg-gray-200">
             <p class="text-sm text-gray-600">&copy; {{ date('Y') }} ACPbook. Todos os direitos reservados.</p>
         </footer>
+
+        <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

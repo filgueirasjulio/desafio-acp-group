@@ -27,6 +27,7 @@ Route::group(['prefix' => 'tag', 'middleware' => ['auth:sanctum']], function () 
 
 #posts
 Route::group(['prefix' => 'post', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/', [PostController::class, 'index']);
     Route::get('/{id}/show', [PostController::class, 'show']);
     Route::post('/store', [PostController::class, 'store']);
     Route::put('/{id}/update', [PostController::class, 'update']);
