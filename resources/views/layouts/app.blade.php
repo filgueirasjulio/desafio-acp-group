@@ -14,7 +14,7 @@
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div class="flex items-center justify-between h-full">
                     <!-- Logo -->
-                    <a href="/dashboard" class="text-xl font-bold text-blue-600">ACPBook</a>
+                    <a href="/" class="text-xl font-bold text-blue-600">ACPBook</a>
         
                     <!-- Foto e Dropdown -->
                     <div class="relative flex items-center">

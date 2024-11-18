@@ -14,7 +14,7 @@
         <header class="w-full bg-white shadow h-16 flex items-center">
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div class="flex items-center justify-start h-full">
-                    <a href="/dashboard" class="text-xl font-bold text-blue-600">ACPBook</a>
+                    <a href="/" class="text-xl font-bold text-blue-600">ACPBook</a>
                 </div>
             </nav>
         </header>
