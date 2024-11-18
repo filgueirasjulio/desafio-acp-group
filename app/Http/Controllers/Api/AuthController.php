@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -28,14 +24,7 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        session()->put('auth_token', $token);
-
         return response()->json(['token' => $token]);
-    }
-
-    public function showRegisterForm()
-    {
-        return view('auth.login');
     }
 
     public function register(Request $request)

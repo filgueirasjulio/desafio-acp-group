@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\AuthController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-
 
 #Usuários
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {

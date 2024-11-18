@@ -29,6 +29,11 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
+    'headers' => [
+        'Access-Control-Allow-Methods',
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Credentials',
+    ],
 ];
