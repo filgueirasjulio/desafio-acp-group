@@ -18,8 +18,8 @@ class UserAndPostSeeder extends Seeder
      public function run()
      {
          $admin = User::create([
-             'name' => 'Admin',
-             'email' => 'admin@mail.com',
+             'name' => 'Júlio',
+             'email' => 'julio@mail.com',
              'email_verified_at' => now(),
              'password' => Hash::make('senha123'),
              'remember_token' => Str::random(10),
