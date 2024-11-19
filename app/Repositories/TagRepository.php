@@ -15,7 +15,7 @@ class TagRepository
         $this->model = $model;
     }
 
-    public function all(array $filters = null): Paginator
+    public function all(array $filters = null)
     {
         $result = $this->model;
 

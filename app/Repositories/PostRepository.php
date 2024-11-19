@@ -14,7 +14,7 @@ class PostRepository
         $this->model = $model;
     }
 
-    public function all(array $filters = null): Collection
+    public function all(array $filters = null)
     {
         $result = $this->model->with('user', 'tags');
 

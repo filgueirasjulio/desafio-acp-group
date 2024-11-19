@@ -15,7 +15,7 @@ class UserRepository
         $this->model = $model;
     }
 
-    public function all(): Paginator
+    public function all()
     {
         return $this->model->paginate(15);
     }
