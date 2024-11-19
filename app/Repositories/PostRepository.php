@@ -18,7 +18,7 @@ class PostRepository
     {
         $result = $this->model->with('user', 'tags');
 
-        if(isset($fiters['user_id'])) {
+        if(isset($filters['user_id'])) {
             $result = $result->where('user_id', $filters['user_id']);
         }
 

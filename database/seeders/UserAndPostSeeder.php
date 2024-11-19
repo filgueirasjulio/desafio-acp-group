@@ -25,7 +25,9 @@ class UserAndPostSeeder extends Seeder
              'remember_token' => Str::random(10),
          ]);
  
-         $users = User::factory(5)->create();
+         User::factory(5)->create();
+
+         $users = User::all();
 
          $users->each(function (User $user) {
             for ($i = 0; $i < rand(2, 3); $i++) {

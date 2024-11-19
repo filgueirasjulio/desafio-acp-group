@@ -28,6 +28,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
+/***/ "./resources/sass/components.scss":
+/*!****************************************!*\
+  !*** ./resources/sass/components.scss ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvc2Fzcy9jb21wb25lbnRzLnNjc3MiLCJtYXBwaW5ncyI6IjtBQUFBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vYXBwLWxhcmF2ZWwvLi9yZXNvdXJjZXMvc2Fzcy9jb21wb25lbnRzLnNjc3M/NTJkNCJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBleHRyYWN0ZWQgYnkgbWluaS1jc3MtZXh0cmFjdC1wbHVnaW5cbmV4cG9ydCB7fTsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/sass/components.scss\n");
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -126,6 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// [resolve, Promise] = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
 /******/ 		"/js/bootstrap": 0,
+/******/ 		"css/components": 0,
 /******/ 		"css/auth": 0,
 /******/ 		"css/app": 0
 /******/ 	};
@@ -148,8 +159,9 @@ __webpack_require__.r(__webpack_exports__);
 /******/ // startup
 /******/ // Load entry module and return exports
 /******/ // This entry module depends on other loaded chunks and execution need to be delayed
-/******/ __webpack_require__.O(undefined, ["css/auth","css/app"], () => (__webpack_require__("./resources/js/bootstrap.js")))
-/******/ __webpack_require__.O(undefined, ["css/auth","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ var __webpack_exports__ = __webpack_require__.O(undefined, ["css/auth","css/app"], () => (__webpack_require__("./resources/sass/auth.scss")))
+/******/ __webpack_require__.O(undefined, ["css/components","css/auth","css/app"], () => (__webpack_require__("./resources/js/bootstrap.js")))
+/******/ __webpack_require__.O(undefined, ["css/components","css/auth","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ __webpack_require__.O(undefined, ["css/components","css/auth","css/app"], () => (__webpack_require__("./resources/sass/auth.scss")))
+/******/ var __webpack_exports__ = __webpack_require__.O(undefined, ["css/components","css/auth","css/app"], () => (__webpack_require__("./resources/sass/components.scss")))
 /******/ __webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 

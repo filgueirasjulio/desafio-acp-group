@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './components.scss';
+
 .navbar {
     display: flex;
     align-items: center;
