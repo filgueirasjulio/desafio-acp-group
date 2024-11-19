@@ -13,6 +13,11 @@ class TagService
         $this->tagRepository = $tagRepository;
     }
 
+    public function index(array $filters)
+    {
+        return $this->tagRepository->all($filters);
+    }
+
     public function show(int $id)
     {
         return $this->tagRepository->find($id);

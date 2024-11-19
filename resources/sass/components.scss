@@ -1,18 +1,20 @@
 .switch {
-    position: relative;
+    position: absolute; /* Muda de relative para absolute */
+    left: 50px; /* Alinha à esquerda */
+    top: 90px; /* Ajusta a distância do topo, para não ficar atrás do nav */
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin-top: 40px;
-  }
-  
-  .switch input { 
+    z-index: 10; /* Coloca o toggle acima de outros elementos (como o nav) */
+}
+
+.switch input { 
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -22,9 +24,9 @@
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -34,7 +36,7 @@
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
+}
   
   input:checked + .slider {
     background-color: #2196F3;

@@ -19,6 +19,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function ()
 
 #tags
 Route::group(['prefix' => 'tag', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/', [TagController::class, 'index']);
     Route::get('/{id}/show', [TagController::class, 'show']);
     Route::post('/store', [TagController::class, 'store']);
     Route::put('/{id}/update', [TagController::class, 'update']);

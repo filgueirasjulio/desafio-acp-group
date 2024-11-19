@@ -1,9 +1,12 @@
+@charset "UTF-8";
 .switch {
-  position: relative;
+  position: absolute; /* Muda de relative para absolute */
+  left: 50px; /* Alinha à esquerda */
+  top: 90px; /* Ajusta a distância do topo, para não ficar atrás do nav */
   display: inline-block;
   width: 60px;
   height: 34px;
-  margin-top: 40px;
+  z-index: 10; /* Coloca o toggle acima de outros elementos (como o nav) */
 }
 
 .switch input {

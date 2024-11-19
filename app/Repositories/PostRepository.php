@@ -33,7 +33,10 @@ class PostRepository
     public function store(array $data): Post
     {
         $post = $this->model->create($data);
-        $post->tags()->attach($data['tags']);
+
+        if(isset($data['tags']) & !empty($data['tags'])) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return $post;
     }
@@ -48,7 +51,9 @@ class PostRepository
 
         $post->update($data);
 
-        $post->tags()->sync($data['tags']);
+        if(isset($data['tags']) & !empty($data['tags'])) {
+            $post->tags()->sync($data['tags']);
+        }
 
         return $post;
     }

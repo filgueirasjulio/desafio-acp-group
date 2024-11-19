@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Services\Api\TagService;
 use App\Http\Requests\TagRequest;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\TagResource;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TagController extends Controller
 {
@@ -17,6 +19,11 @@ class TagController extends Controller
         $this->tagService = $tagService;
     }
 
+    public function index(Request $request): ResourceCollection
+    {
+        return TagResource::collection($this->tagService->index($request->all()));
+    }
+    
     public function show(int $id): TagResource
     {
         return new TagResource($this->tagService->show($id));

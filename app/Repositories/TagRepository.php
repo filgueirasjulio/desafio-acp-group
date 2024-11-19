@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Tag;
+use Illuminate\Support\Collection;
+
 class TagRepository
 {
     private Tag $model;
@@ -12,6 +14,17 @@ class TagRepository
         $this->model = $model;
     }
 
+    public function all(array $filters = null): Collection
+    {
+        $result = $this->model;
+
+        if(isset($filters['description'])) {
+            $result = $result->where('slug', 'LIKE', '%'.$filters['description'].'%');
+        }
+
+        return $result->orderBy('description', 'asc')->get();
+    }
+    
     public function find(int $id): ?Tag
     {
         return $this->model->find($id);

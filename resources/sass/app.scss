@@ -12,10 +12,21 @@
     padding: 0 1rem;
   }
   
-  .navbar a {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #4f46e5;
-    text-decoration: none;
-  }
-  
+.navbar a {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+//home
+.new-post {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.3s ease, transform 1.3s ease;
+}
+
+.new-post.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

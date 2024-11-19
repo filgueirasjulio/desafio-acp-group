@@ -24,7 +24,7 @@ class PostRequest extends FormRequest
         return [
             'user_id' => 'required',
             'content' => 'required|string',
-            'tags' => 'required|array'
+            'tags' => 'sometimes'
         ];
     }
 }
