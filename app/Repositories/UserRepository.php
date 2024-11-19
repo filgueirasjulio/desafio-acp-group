@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Collection;
 
 class UserRepository
 {
@@ -11,6 +13,11 @@ class UserRepository
     public function __construct(User $model)
     {
         $this->model = $model;
+    }
+
+    public function all(): Paginator
+    {
+        return $this->model->paginate(15);
     }
 
     public function find(int $id): ?User

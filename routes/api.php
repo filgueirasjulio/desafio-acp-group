@@ -12,6 +12,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 #Usuários
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/', [UserController::class, 'index']);
     Route::get('/{id}/show', [UserController::class, 'show']);
     Route::put('/{id}/update', [UserController::class, 'update']);
     Route::delete('/{id}/delete', [UserController::class, 'delete']);

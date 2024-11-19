@@ -1,10 +1,10 @@
 FROM php:8.3-fpm
 
-# set your user name, ex: user=carlos
+# Definir variáveis de argumento
 ARG user=yourusername
 ARG uid=1000
 
-# Install system dependencies
+# Instalar dependências do sistema
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -14,29 +14,42 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
-# Clear cache
+# Limpar cache do apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
+# Instalar extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
-# Get latest Composer
+# Obter Composer mais recente
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
+# Criar usuário do sistema
+RUN useradd -G www-data,root -u $uid -d /home/$user $user && \
+    mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-# Install redis
+# Instalar extensão Redis
 RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis
 
-# Set working directory
+# Definir o diretório de trabalho
 WORKDIR /var/www
 
-# Copy custom configurations PHP
+# Copiar arquivos composer.json e composer.lock
+COPY composer.json composer.lock /var/www/
+
+# Instalar dependências do Composer
+RUN composer install --no-scripts --no-autoloader
+
+# Copiar restante do projeto
+COPY . /var/www
+
+# Rodar autoloader do Composer
+RUN composer dump-autoload --optimize
+
+# Copiar configurações PHP customizadas
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
+# Trocar para o usuário criado
 USER $user

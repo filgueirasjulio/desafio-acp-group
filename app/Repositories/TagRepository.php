@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Tag;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
 
 class TagRepository
 {
@@ -14,7 +15,7 @@ class TagRepository
         $this->model = $model;
     }
 
-    public function all(array $filters = null): Collection
+    public function all(array $filters = null): Paginator
     {
         $result = $this->model;
 
@@ -22,7 +23,7 @@ class TagRepository
             $result = $result->where('slug', 'LIKE', '%'.$filters['description'].'%');
         }
 
-        return $result->orderBy('description', 'asc')->get();
+        return $result->orderBy('description', 'asc')->paginate(20);
     }
     
     public function find(int $id): ?Tag

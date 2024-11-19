@@ -1,0 +1,642 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ACPBook Doc",
+        "description": "Documentação api AcpBook",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Fazer login",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso. Retorna o token de autenticação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Registrar novo usuário",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário registrado com sucesso. Retorna o token de autenticação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Desconectar o usuário",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Desconectado com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/post": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Lista de publicações",
+                "operationId": "a8f335e0ced7872d7012086d0ecce9dd",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "ID do usuário para filtrar as publicações",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de publicações"
+                    }
+                }
+            }
+        },
+        "/api/post/{id}/show": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Retornar postagem",
+                "operationId": "7db240fd8f3c230b81bed8ceba264f78",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário para buscar as publicações",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes da publicação"
+                    }
+                }
+            }
+        },
+        "/api/post/store": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Criar nova publicação",
+                "operationId": "f2e3743fe571eb83ec67d7be80533f2d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "description": "ID do usuário",
+                                        "type": "integer"
+                                    },
+                                    "content": {
+                                        "description": "Conteúdo da publicação",
+                                        "type": "string"
+                                    },
+                                    "tags": {
+                                        "description": "Tags associadas ao post (não obrigatórias)",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Publicação criada com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Atualizar publicação existente",
+                "operationId": "650f4bed0846d9350903d8a17c7b503a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da publicação para ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "tags": {
+                                        "description": "Tags associadas ao post (não obrigatórias)",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Publicação atualizada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Excluir publicação",
+                "operationId": "62832788f1e230c55f7c8a9ec5b482fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da publicação a ser excluída",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Publicação excluída com sucesso"
+                    },
+                    "404": {
+                        "description": "Publicação não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tag": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Listar todas as tags",
+                "operationId": "a52ca92f98c603351f1f68f4a2243f88",
+                "parameters": [
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Filtrar tags pela descrição",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de tags"
+                    }
+                }
+            }
+        },
+        "/api/tag/{id}/show": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Exibir uma tag específica",
+                "operationId": "6f104441e798f8c6e6378e243465b743",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tag",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes da tag"
+                    },
+                    "404": {
+                        "description": "Tag não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tag/store": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Criar nova tag",
+                "operationId": "e5b5f0f831fbad7da5a70968cfe2cb4c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description",
+                                    "bg_color"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "description": "Descrição da tag",
+                                        "type": "string"
+                                    },
+                                    "bg_color": {
+                                        "description": "Cor de fundo da tag",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag criada com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/tag/{id}/update": {
+            "put": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Atualizar uma tag",
+                "operationId": "bab44e5742743a5f9998f9d729704a00",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tag a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description",
+                                    "bg_color"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "description": "Descrição da tag",
+                                        "type": "string"
+                                    },
+                                    "bg_color": {
+                                        "description": "Cor de fundo da tag",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tag atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Tag não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tag/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Deletar uma tag",
+                "operationId": "07af5ac764279b74c649ce2a198802dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tag a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tag deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Tag não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Listar todos os usuários",
+                "operationId": "ef3192335324c07faff67807a2e8a2f8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}/show": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Exibir detalhes de um usuário",
+                "operationId": "c8ce8fc859ded3e53e4fcd0f7438cd00",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do usuário"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}/update": {
+            "put": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Atualizar dados do usuário",
+                "operationId": "3a271c1ec85bbf8949db575d1ea60503",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário atualizado"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    },
+                    "403": {
+                        "description": "Ação não autorizada"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Deletar um usuário",
+                "operationId": "0bc5f122a227b357281aa34268d099fe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    },
+                    "403": {
+                        "description": "Ação não autorizada"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticação",
+            "description": "Autenticação"
+        },
+        {
+            "name": "Posts",
+            "description": "Posts"
+        },
+        {
+            "name": "Tags",
+            "description": "Tags"
+        },
+        {
+            "name": "Usuários",
+            "description": "Usuários"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
+}
